@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton's Laws - Practice Quiz | CFBC Physics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --caribbean-blue: #0077BE;
+            --sand-yellow: #F4D03F;
+            --sunset-orange: #E67E22;
+            --palm-green: #27AE60;
+            --deep-blue: #1A3A52;
+            --coral-pink: #FF6B9D;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: var(--deep-blue);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--caribbean-blue), var(--palm-green));
+            padding: 2.5rem;
+            border-radius: 20px 20px 0 0;
+            color: white;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .emoji {
+            font-size: 2rem;
+            margin: 0 0.5rem;
+        }
+
+        .quiz-content {
+            background: var(--white);
+            padding: 0;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .question-card {
+            padding: 2.5rem;
+            border-bottom: 3px solid var(--light-gray);
+            transition: all 0.3s ease;
+        }
+
+        .question-card:last-child {
+            border-bottom: none;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .question-card:hover {
+            background: var(--light-gray);
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--sunset-orange), var(--coral-pink));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--deep-blue);
+        }
+
+        .question-text strong {
+            color: var(--caribbean-blue);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+
+        .btn-hint {
+            background: var(--sand-yellow);
+            color: var(--deep-blue);
+        }
+
+        .btn-hint:hover {
+            background: #F1C40F;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(244, 208, 63, 0.4);
+        }
+
+        .btn-solution {
+            background: var(--palm-green);
+            color: white;
+        }
+
+        .btn-solution:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        .btn-steps {
+            background: var(--caribbean-blue);
+            color: white;
+        }
+
+        .btn-steps:hover {
+            background: #005A8D;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 119, 190, 0.4);
+        }
+
+        .info-box {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: none;
+            animation: slideDown 0.4s ease;
+            line-height: 1.8;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hint-box {
+            background: linear-gradient(135deg, #FFF9E6, #FFF3CD);
+            border-left: 5px solid var(--sand-yellow);
+            color: var(--deep-blue);
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #E8F8F5, #D5F4E6);
+            border-left: 5px solid var(--palm-green);
+            color: var(--deep-blue);
+        }
+
+        .steps-box {
+            background: linear-gradient(135deg, #EBF5FB, #D6EAF8);
+            border-left: 5px solid var(--caribbean-blue);
+            color: var(--deep-blue);
+        }
+
+        .info-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box p {
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box .final-answer {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-weight: 600;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.05rem;
+            border: 2px dashed rgba(0, 0, 0, 0.2);
+        }
+
+        .equation {
+            font-family: 'Roboto Mono', monospace;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .step {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            border-left: 3px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: white;
+            font-size: 0.95rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer a {
+            color: var(--sand-yellow);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .question-card {
+                padding: 1.5rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji">⚡</span>Newton's Laws Practice Quiz<span class="emoji">🎯</span></h1>
+            <p>20 Problems - Test Your Understanding!</p>
+        </div>
+
+        <div class="quiz-content">
+            <!-- Question 1 -->
+            <div class="question-card">
+                <span class="question-number">Question 1</span>
+                <div class="question-text">
+                    A <strong>cargo container at Port Zante</strong> has mass 120 kg. A crane lifts it with a cable. Find the tension in the cable when:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) the container is at rest</li>
+                        <li>(b) it accelerates upward at 2 m/s²</li>
+                        <li>(c) it accelerates downward at 1.5 m/s²</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint1')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution1')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps1')">📝 Show Steps</button>
+                </div>
+                <div id="hint1" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Choose upward as positive direction.</p>
+                    <p>Forces: Tension T (up), Weight mg (down)</p>
+                    <p>(a) Equilibrium: T = mg</p>
+                    <p>(b) Net upward: T - mg = ma</p>
+                    <p>(c) Net downward: T - mg = ma (where a is negative)</p>
+                    <p>Use g = 10 m/s²</p>
+                </div>
+                <div id="solution1" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) T = 1200 N<br>
+                        (b) T = 1440 N<br>
+                        (c) T = 1020 N
+                    </div>
+                </div>
+                <div id="steps1" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>Given:</strong> m = 120 kg, g = 10 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(a) At rest (a = 0):</strong><br>
+                        T - mg = 0<br>
+                        T = 120 × 10 = 1200 N
+                    </div>
+                    <div class="step">
+                        <strong>(b) Accelerating upward (a = 2 m/s²):</strong><br>
+                        T - mg = ma<br>
+                        T = mg + ma = m(g + a)<br>
+                        T = 120(10 + 2) = 120 × 12 = 1440 N
+                    </div>
+                    <div class="step">
+                        <strong>(c) Accelerating downward (a = -1.5 m/s²):</strong><br>
+                        T - mg = ma<br>
+                        T = m(g + a) = 120(10 - 1.5)<br>
+                        T = 120 × 8.5 = 1020 N
+                    </div>
+                    <div class="final-answer">
+                        Tension increases when accelerating up, decreases when accelerating down
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-card">
+                <span class="question-number">Question 2</span>
+                <div class="question-text">
+                    A <strong>water taxi at Christophe Harbour</strong> of mass 500 kg experiences a driving force of 2500 N and water resistance of 500 N. Calculate:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) the acceleration</li>
+                        <li>(b) velocity after 8 seconds from rest</li>
+                        <li>(c) distance traveled in 8 seconds</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint2')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution2')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps2')">📝 Show Steps</button>
+                </div>
+                <div id="hint2" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>(a) Net force = Driving force - Resistance, then F = ma</p>
+                    <p>(b) Use v = u + at (u = 0)</p>
+                    <p>(c) Use s = ut + ½at²</p>
+                </div>
+                <div id="solution2" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a = 4 m/s²<br>
+                        (b) v = 32 m/s<br>
+                        (c) s = 128 m
+                    </div>
+                </div>
+                <div id="steps2" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>Given:</strong> m = 500 kg, Driving = 2500 N, Resistance = 500 N, t = 8 s, u = 0
+                    </div>
+                    <div class="step">
+                        <strong>(a) Acceleration:</strong><br>
+                        F_net = 2500 - 500 = 2000 N<br>
+                        F = ma → 2000 = 500a<br>
+                        a = 4 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b) Velocity:</strong><br>
+                        v = u + at = 0 + 4(8) = 32 m/s
+                    </div>
+                    <div class="step">
+                        <strong>(c) Distance:</strong><br>
+                        s = ut + ½at² = 0 + ½(4)(64) = 128 m
+                    </div>
+                    <div class="final-answer">
+                        The taxi accelerates at 4 m/s², reaches 32 m/s, and travels 128 m
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-card">
+                <span class="question-number">Question 3</span>
+                <div class="question-text">
+                    A <strong>crate at Basseterre dock</strong> (mass 80 kg) is pulled horizontally by a rope with tension 240 N. Friction opposes motion with force 80 N. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) the acceleration</li>
+                        <li>(b) velocity after 5 seconds from rest</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint3')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution3')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps3')">📝 Show Steps</button>
+                </div>
+                <div id="hint3" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Net horizontal force = Tension - Friction</p>
+                    <p>Apply F = ma, then use v = u + at</p>
+                </div>
+                <div id="solution3" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a = 2 m/s²<br>
+                        (b) v = 10 m/s
+                    </div>
+                </div>
+                <div id="steps3" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>Given:</strong> m = 80 kg, T = 240 N, f = 80 N, t = 5 s, u = 0
+                    </div>
+                    <div class="step">
+                        <strong>(a) Acceleration:</strong><br>
+                        Net force = 240 - 80 = 160 N<br>
+                        F = ma → 160 = 80a<br>
+                        a = 2 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b) Velocity:</strong><br>
+                        v = u + at = 0 + 2(5) = 10 m/s
+                    </div>
+                    <div class="final-answer">
+                        The crate accelerates at 2 m/s² and reaches 10 m/s after 5 seconds
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-card">
+                <span class="question-number">Question 4</span>
+                <div class="question-text">
+                    Two <strong>boats at Frigate Bay</strong> are connected by a light rope. Boat A (250 kg, front) has motor providing 1800 N thrust. Boat B (150 kg, rear) is towed. System experiences 600 N total resistance. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) acceleration of the boats</li>
+                        <li>(b) tension in the rope</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint4')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution4')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps4')">📝 Show Steps</button>
+                </div>
+                <div id="hint4" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>(a) Consider whole system: Total mass = 400 kg, Net force = 1200 N</p>
+                    <p>(b) Consider boat B alone: Resistance on B = 600 × (150/400)</p>
+                    <p>For B: T - Resistance_B = m_B × a</p>
+                </div>
+                <div id="solution4" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a = 3 m/s²<br>
+                        (b) T = 675 N
+                    </div>
+                </div>
+                <div id="steps4" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>Given:</strong> m_A = 250 kg, m_B = 150 kg, Thrust = 1800 N, Total resistance = 600 N
+                    </div>
+                    <div class="step">
+                        <strong>(a) System acceleration:</strong><br>
+                        Total mass = 400 kg<br>
+                        Net force = 1800 - 600 = 1200 N<br>
+                        a = 1200/400 = 3 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b) Tension (consider B alone):</strong><br>
+                        Resistance on B = 600 × (150/400) = 225 N<br>
+                        T - 225 = 150 × 3<br>
+                        T = 450 + 225 = 675 N
+                    </div>
+                    <div class="final-answer">
+                        Both boats accelerate at 3 m/s² with rope tension 675 N
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-card">
+                <span class="question-number">Question 5</span>
+                <div class="question-text">
+                    A <strong>helicopter at Nevis Peak</strong> raises two connected hikers. Top hiker A (85 kg), bottom hiker B (65 kg). Helicopter applies 1800 N force to A. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) acceleration of the system</li>
+                        <li>(b) tension in rope between them</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint5')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution5')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps5')">📝 Show Steps</button>
+                </div>
+                <div id="hint5" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Both have same acceleration (connected)</p>
+                    <p>For system: 1800 - Total weight = Total mass × a</p>
+                    <p>For B alone: T - weight_B = m_B × a</p>
+                </div>
+                <div id="solution5" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a = 2 m/s²<br>
+                        (b) T = 780 N
+                    </div>
+                </div>
+                <div id="steps5" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>Given:</strong> m_A = 85 kg, m_B = 65 kg, Applied = 1800 N
+                    </div>
+                    <div class="step">
+                        <strong>(a) Acceleration:</strong><br>
+                        Total mass = 150 kg, Total weight = 1500 N<br>
+                        1800 - 1500 = 150a<br>
+                        a = 2 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b) Tension (for B):</strong><br>
+                        T - 65(10) = 65(2)<br>
+                        T - 650 = 130<br>
+                        T = 780 N
+                    </div>
+                    <div class="final-answer">
+                        System accelerates at 2 m/s² with rope tension 780 N
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question-card">
+                <span class="question-number">Question 6</span>
+                <div class="question-text">
+                    A <strong>package at Sandy Point</strong> (10 kg) rests on a smooth horizontal surface. A horizontal force of 60 N is applied. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) acceleration</li>
+                        <li>(b) distance moved in 4 seconds from rest</li>
+                        <li>(c) velocity after 4 seconds</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint6')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution6')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps6')">📝 Show Steps</button>
+                </div>
+                <div id="hint6" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>"Smooth" means no friction!</p>
+                    <p>(a) F = ma</p>
+                    <p>(b) s = ut + ½at²</p>
+                    <p>(c) v = u + at</p>
+                </div>
+                <div id="solution6" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a = 6 m/s²<br>
+                        (b) s = 48 m<br>
+                        (c) v = 24 m/s
+                    </div>
+                </div>
+                <div id="steps6" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>Given:</strong> m = 10 kg, F = 60 N, t = 4 s, u = 0
+                    </div>
+                    <div class="step">
+                        <strong>(a) Acceleration:</strong><br>
+                        60 = 10a → a = 6 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b) Distance:</strong><br>
+                        s = 0 + ½(6)(16) = 48 m
+                    </div>
+                    <div class="step">
+                        <strong>(c) Velocity:</strong><br>
+                        v = 0 + 6(4) = 24 m/s
+                    </div>
+                    <div class="final-answer">
+                        a = 6 m/s², distance = 48 m, velocity = 24 m/s
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question-card">
+                <span class="question-number">Question 7</span>
+                <div class="question-text">
+                    A <strong>CFBC shuttle bus</strong> (2000 kg) accelerates from rest. Engine provides 8000 N driving force, experiences 2000 N resistance. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) acceleration</li>
+                        <li>(b) velocity after 10 seconds</li>
+                        <li>(c) distance in 10 seconds</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint7')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution7')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps7')">📝 Show Steps</button>
+                </div>
+                <div id="hint7" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Net force = 8000 - 2000 = 6000 N</p>
+                    <p>Standard F = ma and kinematics</p>
+                </div>
+                <div id="solution7" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a = 3 m/s²<br>
+                        (b) v = 30 m/s<br>
+                        (c) s = 150 m
+                    </div>
+                </div>
+                <div id="steps7" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>(a):</strong> Net = 6000 N, a = 6000/2000 = 3 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b):</strong> v = 0 + 3(10) = 30 m/s
+                    </div>
+                    <div class="step">
+                        <strong>(c):</strong> s = ½(3)(100) = 150 m
+                    </div>
+                    <div class="final-answer">
+                        a = 3 m/s², v = 30 m/s, s = 150 m
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question-card">
+                <span class="question-number">Question 8</span>
+                <div class="question-text">
+                    Three masses hang vertically: A (5 kg) top, B (3 kg) middle, C (2 kg) bottom. String above A pulls with 120 N. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) acceleration</li>
+                        <li>(b) tension between A-B</li>
+                        <li>(c) tension between B-C</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint8')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution8')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps8')">📝 Show Steps</button>
+                </div>
+                <div id="hint8" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Total mass = 10 kg, Total weight = 100 N</p>
+                    <p>For system: 120 - 100 = 10a</p>
+                    <p>For B+C: T₁ - 50 = 5a</p>
+                    <p>For C: T₂ - 20 = 2a</p>
+                </div>
+                <div id="solution8" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a = 2 m/s²<br>
+                        (b) T₁ = 60 N<br>
+                        (c) T₂ = 24 N
+                    </div>
+                </div>
+                <div id="steps8" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>(a):</strong> 120 - 100 = 10a → a = 2 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b):</strong> T₁ - 50 = 5(2) → T₁ = 60 N
+                    </div>
+                    <div class="step">
+                        <strong>(c):</strong> T₂ - 20 = 2(2) → T₂ = 24 N
+                    </div>
+                    <div class="final-answer">
+                        a = 2 m/s², T₁ = 60 N, T₂ = 24 N
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question-card">
+                <span class="question-number">Question 9</span>
+                <div class="question-text">
+                    A <strong>jet ski at Cockleshell Beach</strong> (300 kg with rider) accelerates from rest with thrust 1200 N and water resistance 300 N. Find speed after 6 seconds.
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint9')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution9')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps9')">📝 Show Steps</button>
+                </div>
+                <div id="hint9" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Net force = 1200 - 300 = 900 N</p>
+                    <p>Find a, then use v = u + at</p>
+                </div>
+                <div id="solution9" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        v = 18 m/s
+                    </div>
+                </div>
+                <div id="steps9" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        Net = 900 N, a = 900/300 = 3 m/s²
+                    </div>
+                    <div class="step">
+                        v = 0 + 3(6) = 18 m/s
+                    </div>
+                    <div class="final-answer">
+                        Speed after 6 seconds: 18 m/s
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question-card">
+                <span class="question-number">Question 10</span>
+                <div class="question-text">
+                    A <strong>safari bus on Timothy Hill</strong> (1500 kg) brakes from 25 m/s. Braking force 4500 N, rolling resistance 1500 N. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) deceleration</li>
+                        <li>(b) stopping time</li>
+                        <li>(c) stopping distance</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint10')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution10')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps10')">📝 Show Steps</button>
+                </div>
+                <div id="hint10" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Total retarding force = 4500 + 1500 = 6000 N</p>
+                    <p>(a) a = -6000/1500</p>
+                    <p>(b) v = u + at with v = 0</p>
+                    <p>(c) v² = u² + 2as</p>
+                </div>
+                <div id="solution10" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) Deceleration = 4 m/s²<br>
+                        (b) t = 6.25 s<br>
+                        (c) s = 78.1 m
+                    </div>
+                </div>
+                <div id="steps10" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>(a):</strong> a = -6000/1500 = -4 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b):</strong> 0 = 25 - 4t → t = 6.25 s
+                    </div>
+                    <div class="step">
+                        <strong>(c):</strong> 0 = 625 - 8s → s = 78.125 m
+                    </div>
+                    <div class="final-answer">
+                        Deceleration 4 m/s², stops in 6.25 s after 78.1 m
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question-card">
+                <span class="question-number">Question 11</span>
+                <div class="question-text">
+                    A <strong>lift at Belle Mont Resort</strong> (400 kg total) is supported by a cable. Find tension when:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) moving upward at constant 3 m/s</li>
+                        <li>(b) accelerating upward at 1.5 m/s²</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint11')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution11')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps11')">📝 Show Steps</button>
+                </div>
+                <div id="hint11" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>(a) Constant velocity means a = 0!</p>
+                    <p>(b) T - mg = ma</p>
+                </div>
+                <div id="solution11" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) T = 4000 N<br>
+                        (b) T = 4600 N
+                    </div>
+                </div>
+                <div id="steps11" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        Weight = 400 × 10 = 4000 N
+                    </div>
+                    <div class="step">
+                        <strong>(a):</strong> Constant velocity → T = 4000 N
+                    </div>
+                    <div class="step">
+                        <strong>(b):</strong> T - 4000 = 400(1.5) → T = 4600 N
+                    </div>
+                    <div class="final-answer">
+                        (a) T = 4000 N, (b) T = 4600 N
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question-card">
+                <span class="question-number">Question 12</span>
+                <div class="question-text">
+                    A <strong>10 kg package slides down a smooth 30° incline</strong> at Sandy Point. Taking g = 10 m/s²:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) Find component of weight down slope</li>
+                        <li>(b) Calculate acceleration</li>
+                        <li>(c) Speed after sliding 5 m from rest</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint12')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution12')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps12')">📝 Show Steps</button>
+                </div>
+                <div id="hint12" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>(a) Component = mg sin 30°</p>
+                    <p>(b) a = g sin θ (for smooth incline)</p>
+                    <p>(c) v² = u² + 2as</p>
+                </div>
+                <div id="solution12" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) 50 N<br>
+                        (b) a = 5 m/s²<br>
+                        (c) v = 7.07 m/s
+                    </div>
+                </div>
+                <div id="steps12" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>(a):</strong> mg sin 30° = 100 × 0.5 = 50 N
+                    </div>
+                    <div class="step">
+                        <strong>(b):</strong> a = 50/10 = 5 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(c):</strong> v² = 0 + 2(5)(5) = 50 → v = 7.07 m/s
+                    </div>
+                    <div class="final-answer">
+                        50 N down slope, a = 5 m/s², v = 7.07 m/s
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question-card">
+                <span class="question-number">Question 13</span>
+                <div class="question-text">
+                    A <strong>200 kg boat at Christophe Harbour</strong> tows a 100 kg trailer. Motor provides 900 N thrust, total resistance 300 N. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) acceleration</li>
+                        <li>(b) tension in tow rope</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint13')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution13')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps13')">📝 Show Steps</button>
+                </div>
+                <div id="hint13" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>(a) System: 900 - 300 = 300a</p>
+                    <p>(b) Trailer: T - (100N resistance) = 100a</p>
+                </div>
+                <div id="solution13" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a = 2 m/s²<br>
+                        (b) T = 300 N
+                    </div>
+                </div>
+                <div id="steps13" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>(a):</strong> 600 = 300a → a = 2 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b):</strong> Resistance on trailer = 100 N<br>
+                        T - 100 = 100(2) → T = 300 N
+                    </div>
+                    <div class="final-answer">
+                        a = 2 m/s², T = 300 N
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question-card">
+                <span class="question-number">Question 14</span>
+                <div class="question-text">
+                    A <strong>50 kg person stands in a lift</strong>. The lift accelerates upward at 2.5 m/s². What normal reaction does the floor exert on the person?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint14')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution14')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps14')">📝 Show Steps</button>
+                </div>
+                <div id="hint14" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Normal reaction R pushes person up</p>
+                    <p>Weight mg pulls person down</p>
+                    <p>R - mg = ma</p>
+                </div>
+                <div id="solution14" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        R = 625 N
+                    </div>
+                </div>
+                <div id="steps14" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        Weight = 50 × 10 = 500 N
+                    </div>
+                    <div class="step">
+                        R - 500 = 50(2.5)<br>
+                        R - 500 = 125<br>
+                        R = 625 N
+                    </div>
+                    <div class="final-answer">
+                        Normal reaction = 625 N (person feels heavier!)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question-card">
+                <span class="question-number">Question 15</span>
+                <div class="question-text">
+                    A <strong>seaplane at Christophe Harbour</strong> (1500 kg) lands at 40 m/s. Water provides 6000 N resistance. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) deceleration</li>
+                        <li>(b) stopping time</li>
+                        <li>(c) stopping distance</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint15')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution15')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps15')">📝 Show Steps</button>
+                </div>
+                <div id="hint15" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>(a) F = ma with F = -6000 N</p>
+                    <p>(b) v = u + at with v = 0</p>
+                    <p>(c) v² = u² + 2as</p>
+                </div>
+                <div id="solution15" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a = 4 m/s²<br>
+                        (b) t = 10 s<br>
+                        (c) s = 200 m
+                    </div>
+                </div>
+                <div id="steps15" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>(a):</strong> -6000 = 1500a → a = -4 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b):</strong> 0 = 40 - 4t → t = 10 s
+                    </div>
+                    <div class="step">
+                        <strong>(c):</strong> 0 = 1600 - 8s → s = 200 m
+                    </div>
+                    <div class="final-answer">
+                        Deceleration 4 m/s², stops in 10 s after 200 m
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question-card">
+                <span class="question-number">Question 16</span>
+                <div class="question-text">
+                    A <strong>60 kg crate at Port Zante</strong> is pulled by a rope at 30° above horizontal with tension 200 N. Friction is 50 N. Find the acceleration.
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint16')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution16')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps16')">📝 Show Steps</button>
+                </div>
+                <div id="hint16" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Horizontal component of tension = 200 cos 30°</p>
+                    <p>Net horizontal = 200 cos 30° - 50</p>
+                </div>
+                <div id="solution16" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        a ≈ 2.05 m/s²
+                    </div>
+                </div>
+                <div id="steps16" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        Horizontal component = 200 × cos 30° = 200 × 0.866 = 173.2 N
+                    </div>
+                    <div class="step">
+                        Net horizontal = 173.2 - 50 = 123.2 N
+                    </div>
+                    <div class="step">
+                        123.2 = 60a → a = 2.05 m/s²
+                    </div>
+                    <div class="final-answer">
+                        Acceleration ≈ 2.05 m/s²
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question-card">
+                <span class="question-number">Question 17</span>
+                <div class="question-text">
+                    Two masses: 8 kg on a smooth table connected by rope over a pulley to 5 kg hanging. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) acceleration of the system</li>
+                        <li>(b) tension in the rope</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint17')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution17')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps17')">📝 Show Steps</button>
+                </div>
+                <div id="hint17" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Hanging mass pulls system with 50 N</p>
+                    <p>Total mass = 13 kg</p>
+                    <p>For 8 kg: T = 8a</p>
+                    <p>For 5 kg: 50 - T = 5a</p>
+                </div>
+                <div id="solution17" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a ≈ 3.85 m/s²<br>
+                        (b) T ≈ 30.8 N
+                    </div>
+                </div>
+                <div id="steps17" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>(a):</strong> System: 50 = 13a → a = 3.85 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b):</strong> For 8 kg: T = 8(3.85) = 30.8 N
+                    </div>
+                    <div class="final-answer">
+                        a = 3.85 m/s², T = 30.8 N
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question-card">
+                <span class="question-number">Question 18</span>
+                <div class="question-text">
+                    A <strong>cargo container</strong> (150 kg) is pushed with 500 N force. It accelerates at 2 m/s². What is the friction force?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint18')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution18')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps18')">📝 Show Steps</button>
+                </div>
+                <div id="hint18" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Net force = ma = 150 × 2 = 300 N</p>
+                    <p>500 - f = 300</p>
+                </div>
+                <div id="solution18" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        f = 200 N
+                    </div>
+                </div>
+                <div id="steps18" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        Net force needed = 150 × 2 = 300 N
+                    </div>
+                    <div class="step">
+                        500 - f = 300<br>
+                        f = 200 N
+                    </div>
+                    <div class="final-answer">
+                        Friction force = 200 N
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question-card">
+                <span class="question-number">Question 19</span>
+                <div class="question-text">
+                    A <strong>90 kg person in a lift</strong> feels an apparent weight of 1080 N. Is the lift accelerating up or down, and at what rate?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint19')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution19')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps19')">📝 Show Steps</button>
+                </div>
+                <div id="hint19" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>Apparent weight = normal reaction R = 1080 N</p>
+                    <p>True weight = 90 × 10 = 900 N</p>
+                    <p>R > W means accelerating upward</p>
+                    <p>R - W = ma</p>
+                </div>
+                <div id="solution19" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        Accelerating upward at 2 m/s²
+                    </div>
+                </div>
+                <div id="steps19" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        R = 1080 N, W = 900 N
+                    </div>
+                    <div class="step">
+                        Since R > W, lift accelerates upward
+                    </div>
+                    <div class="step">
+                        1080 - 900 = 90a<br>
+                        180 = 90a<br>
+                        a = 2 m/s²
+                    </div>
+                    <div class="final-answer">
+                        Accelerating upward at 2 m/s²
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question-card">
+                <span class="question-number">Question 20</span>
+                <div class="question-text">
+                    A <strong>safari bus</strong> (2500 kg) accelerates from rest to 20 m/s in 8 seconds on level ground. Find:
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>(a) acceleration</li>
+                        <li>(b) net force acting on the bus</li>
+                        <li>(c) distance covered</li>
+                    </ul>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="toggleInfo('hint20')">💡 Show Hint</button>
+                    <button class="btn btn-solution" onclick="toggleInfo('solution20')">✓ Show Answer</button>
+                    <button class="btn btn-steps" onclick="toggleInfo('steps20')">📝 Show Steps</button>
+                </div>
+                <div id="hint20" class="info-box hint-box">
+                    <h4>💡 Hint</h4>
+                    <p>(a) a = (v - u)/t</p>
+                    <p>(b) F = ma</p>
+                    <p>(c) s = ut + ½at² or s = ½(u + v)t</p>
+                </div>
+                <div id="solution20" class="info-box solution-box">
+                    <h4>✓ Answer</h4>
+                    <div class="final-answer">
+                        (a) a = 2.5 m/s²<br>
+                        (b) F = 6250 N<br>
+                        (c) s = 80 m
+                    </div>
+                </div>
+                <div id="steps20" class="info-box steps-box">
+                    <h4>📝 Step-by-Step Solution</h4>
+                    <div class="step">
+                        <strong>(a):</strong> a = (20 - 0)/8 = 2.5 m/s²
+                    </div>
+                    <div class="step">
+                        <strong>(b):</strong> F = 2500 × 2.5 = 6250 N
+                    </div>
+                    <div class="step">
+                        <strong>(c):</strong> s = ½(0 + 20) × 8 = 80 m
+                    </div>
+                    <div class="final-answer">
+                        a = 2.5 m/s², F = 6250 N, s = 80 m
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p>🌴 Newton's Laws Practice Quiz - CFBC Physics 🌴</p>
+            <p style="margin-top: 1rem;">20 Complete Problems with Hints, Solutions, and Steps!</p>
+            <p style="margin-top: 1rem;">
+                <a href="#">← Part 2: Worked Examples</a> | 
+                <a href="#">Part 4: Challenge Problems →</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function toggleInfo(id) {
+            const element = document.getElementById(id);
+            const isVisible = element.style.display === 'block';
+            
+            const card = element.closest('.question-card');
+            const allBoxes = card.querySelectorAll('.info-box');
+            allBoxes.forEach(box => box.style.display = 'none');
+            
+            element.style.display = isVisible ? 'none' : 'block';
+            
+            if (!isVisible) {
+                setTimeout(() => {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+        }
+    </script>
+</body>
+</html>
